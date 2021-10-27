@@ -1,0 +1,170 @@
+----- 2.08 -----
+FEATURE: New and improved Playmaker actions
+FEATURE: Mesh generators can now use 32 bit buffers to generate very large meshes
+FEATURE: Added a "Don't Lerp Direction" feature to the Spline Tracers
+
+FIX: Fixed issues with Rebuild on awake for all splines and users
+FIX: Fixed issues with the autoCount property of the SplineMesh component
+FIX: Fixed issue with SplineRenderer not working properly in URP
+FIX: Fixed prefab serialization issues with Nodes not getting set dirty
+
+SUPPORT: Official 2020.3 support
+SUPPORT: Official 2021.1 support
+
+----- 2.07 -----
+FEATURE: Added unity events for SplineFollower.onBeginningReached and SplineFollower.onEndReached assignable from the inspector
+FEATURE: Added an error message to the inspector, indicating when the scene gizmos are disabled
+
+API: Added a parameterless override of SplineComputer.RebuildImmediate so that it can be called by unity events
+
+SUPPORT: Official 2020.2 support
+SUPPORT: Minimum supported version of Unity is now 2018.4
+
+----- 2.06 -----
+FIX: Fix for the spline editor not showing point properties in the inspector
+
+----- 2.05 -----
+SUPPORT: Compatibility with Forever 1.10
+
+----- 2.04 -----
+FIX: Fixed the NotSupportedException when opening Tools or Primitives inside a project with dynamic libraries
+FIX: ParticleController's Backwards motion mode now works properly
+FIX: Fixed the "The name 'threads' does not exist in the current context"" for Windows Store apps
+FIX: Added error log in the console for exceeding 64k vertex limits for meshes
+FIX: Moving multiple spline points in screen space and releasing the mouse no longer deselects the points
+FIX: Orbiting with the Alt key no longer deselects spline points upon left mouse button release
+FIX: Fixed SVG/CSV parsing problems with different regional settings 
+FIX: Fixed Nodes not accepting references to splines which are prefab instances
+
+OPTIMIZATION: Improved performance of vector calculations across the entire product
+
+FEATURE: When multiple points are selected, holding control and clicking on selected points will deselect them
+FEATURE: Added speed modifiers to the Spline Follower. Now the spline follower can be set up to change its speed at different spline regions
+FEATURE: Added toggles to bypass spline sizes and colors for the SplineMesh, PathGenerator, TubeGenerator and WaveformGenerator
+
+----- 2.03 -----
+FIX: Fixed the the inverted (180) rotation of the Path Generator, Tube Generator and the Spline Renderer
+FIX: The Rounded caps of the Tube Generator now properly react to the UV Rotation parameter
+FIX: The Extrusion properties of the Surface Generator can now properly be set through the inspector
+FIX: Deleting points with Nodes in the inspector no longer throws exceptions
+FIX: SplineTracer onEndReached and onBeginningReached events not being called in some cases
+FIX: When using Mesh Generators, setting the spline points to 1 or 0 (removing all points) now properly clears the mesh
+FIX: Fixed SVG import issues and added support for importing arcs thanks to Thycon (community member)
+FIX: Setting the clip range of the Spline Mesh to 0-0 when "auto count" is enabled no longer causes a Stack Overflow
+
+FEATURE: Added a UV Twist feature to the Tube Generator
+
+API: Added the onPostBuild event to the SplineUser which is called after the user has finished updating. Useful when multithreading is enabled.
+
+SUPPORT: Official 2019.4 support
+SUPPORT: Official 2020.1 support
+SUPPORT: Minimum supported Unity version is now 2017.4
+
+----- 2.02 -----
+FIX: Fixed editor freeze when selecting splines in projects with an extensive folder amount
+FIX: Set the default Append mode for the point creation tool to "Ending" so that splines are not created reversed by default
+FIX: Prevented disabled SplineUsers from updating upon being selected/deselected in the editor
+FIX: Fixed undo / redo for Nodes
+FIX: Multiple Nodes can now be edited at once
+FIX: Fixed inaccuracy in the Length Calculator component when clip range is different than [0-1]
+FIX: Fixed scaling tool behavior when using the scale handle, releasing the mouse and using again
+FIX: Fixed the skipping issue in the Train example scene
+FIX: Fixed value editing when multiple Spline Followers are selected in the editor
+FIX: Fixed setting of the Side UV offset and scale values of Surface Generator in the Inspector window
+FIX: Fixed Object Bender behavior when the spline along which the bending is done is attached to the root object of the Object Bender
+FIX: Fixed reverted spline point positions when selecting Node Objectes which have been created using the "Create Node" option in the create point tool
+FIX: When in point creation mode, holding alt and left-clicking no longer creates spline points
+
+FEATURE: Pressing escape while using a spline editing tool will toggle the tool off. Pressing escape with an untoggled tool will toggle edit mode off
+FEATURE: Added a feature to preserve the follow speed of a follower if there is an offset defined in the Motion panel
+
+API: Refactored the SampleCollection class and took out the clipFrom - clipTo properties for stability reasons. clipFrom and clipTo are now only properties of SplineUser
+API: The SplineFollower's onBeginningReached and onEndReached now pass a double argument with the follower's percent from the previous frame. 
+
+
+----- 2.01 -----
+FIX: Fixed the annoying NullReferenceException issue in the Welcome Screen
+FIX: Implemented nsxdavid's fix (Unity Forum) for the Layermask field
+FIX: Fixed the "Create Node" option adding nodes to the wrong point
+FIX: Deleting sample modifiers now properly updates the Spline Users
+FIX: The spline editor now preserves the selected tool when selecting another object and selecting the spline back
+FIX: Fixed issues with mirroring tangents of Bezier splines using the Mirror Tool
+FIX: Sample Modifiers' blending value now multiplies the entire region
+FIX: The SplineProjector now invokes the onNode event properly
+FIX: Updated Playmaker actions
+FIX: Removed legacy editor code which made the Spline Editor slower
+
+FEATURE: Improved the UX of the Spline Edit mode - Ctrl + E now enters and exits edit mode
+FEATURE: Added a Z component to the Mesh offset in the SplineMesh component
+FEATURE: Added custom scaling regions to the channels of the Spline Mesh component - now meshes can be scaled in certain regions
+FEATURE: Small UI improvements
+FEATURE: Improved how the Object Controller scaling works and added a checkbox for toggling between two modes of scaling
+FEATURE: Added the "Mark Dynamic" property to all mesh generators which optimizes performance for meshes that are frequently updated
+
+API: Moved the Spline Computer drawing logic from the SplineDrawer to DSSplineDrawer
+API: Removed the need of the DREAMTECK_SPLINES scripting define
+
+SUPPORT: Minimum supported Unity version is now 2017.2
+
+
+----- 2.00 -----
+FEATURE: Editor UI upgrade
+FEATURE: Completely new Spline Editor written from scratch to be faster, more flexible and intuitive
+FEATURE: Added the "Optimized" sample mode for the Spline Computer which removes spline samples at straight segments to reduce polycount and memory (uses more CPU)
+FEATURE: Added the "Auto Rebuild" property to the Spline Computer which defines whether or not the spline will be automatically re-sampled and the users re-built when a change occurs
+FEATURE: New point deleting tool which works like a brush
+FEATURE: Clicking and holding the left mouse button in create point mode will now adjust the created point's tangents (only in Bezier mode)
+FEATURE: Added the Auto Tangents point operation which generates smooth tangents for the selected Bezier points
+FEATURE: Points can now be moved along surfaces with mesh colliders using the move tool
+FEATURE: New normal editing tool - "Auto" which keeps the spline normals perpendicular to the spline
+FEATURE: Ctrl + A during spline edit mode selects all points
+FEATURE: Ctrl + D during spline edit mode duplicates the selected points and inserts them into the spline
+FEATURE: Added sample count and spline length information inside the Spline Computer editor
+FEATURE: A brand new spline morphing system with a lot of new features
+FEATURE: Sample Modifiers for offset, direction, color and size added to the SplineUser class, allowing for easy manipulation of the spline samples.
+FEATURE: Added the option to remove inner faces for meshes assigned to the Spline Mesh component
+FEATURE: Added the vertex group margin property to the SplineMesh channels. Increasing its value reduces the amount of spline calculations per mesh but also makes the mesh look chunky (used when performance is targeted).
+FEATURE: The 2D option for the splines is no longer an editor-only feature. The SplineComputer now has a "is2D" property which when toggled, will keep the spline flat and the normals pointing back automatically
+FEATURE: Multi-object editing for Spline Users and Spline Computers inside the editor
+FEATURE: Newly created splines start in point creation mode (can be turned off from the preferences)
+FEATURE: Added the Auto Count option to the SplineMesh component's channels. This will automatically set the mesh count for the channel based on the mesh bounds and the spline length
+
+OPTIMIZATION: Spline Users no longer sample the Spline Computers. Instead, the Spline Computer now caches the spline results - this optimizes memory usage.
+OPTIMIZATION: Splines are no longer re-calculated when moving the Spline Computer's transform. Instead, the raw spline samples are now cached and only transformed when the Spline Computer's transform changes.
+OPTIMIZATION: When changing a spline point, only the affected spline area is re-sampled instead of resampling the whole spline (works only for non-uniform splines).
+OPTIMIZATION: General SplineUser performance improvement
+OPTIMIZATION: Multithreading has changed. Instead of each Spline User creating its own thread, a thread manager has been introduced. It automatically runs several threads (two by default) and finds the best suitable thread to run the current frame's logic in.
+
+FIX: Marking mesh generators as double sided no longer throws an exception
+FIX: Reduced GC in the SplineMesh component
+FIX: When a Spline Computer or a Node is a child of another object, moving the parent object will now properly update them
+FIX: Improved the spline drawing performance in the editor
+FIX: The SplineMesh now properly preserves lightmap coordinates
+FIX: The expand functionality of the Surface Generator now works properly for non-extruded surfaces
+FIX: Improved the stability of the Surface Generator
+FIX: Improved the direction calculation for Linear splines
+
+REMOVED: The Junction address has been removed from the Spline Users completely - the system was not flexible enough to facilitate most gameplay needs.
+
+CHANGE: The Precision of the splines [0-1] has been replaced by the sample rate (integer) [2-N]
+CHANGE: The "computer" property of the SplineUser class has been renamed to "spline"
+CHANGE: The sample targets hav been removed - Spline Users now only sample Spline Computers
+CHANGE: The "Uniform Samples" and "Preserve Clip Range" properties of the Spline User have been removed. Uniform is now a property of Spline Computer and samples are automatically handled
+CHANGE: The morph system has been taken out of the Spline Computer component and made into a new, separate component
+CHANGE: The spline triggers are now using the built-in Unity Events
+CHANGE: The spline triggers have been moved from the Spline Tracer class to the Spline Computer class. This allows 
+CHANGE: The Custom Offset and Custom Rotation regions have been removed from the Spline Tracer class. The Sample Modifiers of the SplineUser class now do the same.
+CHANGE: The Mesh Filter component is no longer hidden by default when adding Mesh Generator components to a spline
+CHANGE: The Create new Spline and new Node functionality is now moved inside Game Object -> 3D Object -> Spline Computer
+
+API: Added the onNode event to the SplineTracer which is invoked at the end of every trace cycle and provides information about junctions and nodes passed along the way.
+API: Added the EvaluateUniform method to the Spline class which writes an array of uniformly-spaced values
+API: Added the SplinePoint.AreDifferent static method which compares the values of two spline points and returns true if they are different
+API: The Travel method now has an override with an additional parameter "out float moved" which outputs the actual moved distance
+API: All obsolete code removed
+API: SplineComputer.Project now returns a SplineResult instead of a double
+API: The Evalute, Travel, Project and CalculateLength methods of the SplineUser now only opperate inside the clip range 0 mapping the clipFrom value and 1 mapping the clipTo value
+API: Part of the Evaluate methods and the Project method of the SplineComputer class now have the "mode" parameter which allows for bypassing the spline cache and calculating the actual spline - gives more accurate results but is more performance-heavy
+API: The Evaluate method of the SplineComputer now takes the percent as the first parameter and the SplineResult object as the second one (parameters are flipped).
+API: The SplineFollower.autoFollow property is renamed to just "follow"
+API: Removed legacy code for Unity 5
